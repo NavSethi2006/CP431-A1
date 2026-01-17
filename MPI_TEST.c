@@ -13,6 +13,7 @@
 #include <string.h>
 
 
+
 int main (int argc, char *argv[]) {
 
     int process; // number of processes
@@ -20,7 +21,10 @@ int main (int argc, char *argv[]) {
     int dest; // rank of receiver
     int source; // rank of sender
     int tag = 0; // tag of the message
-    
+
+    mpz_t limit; // limit of the prime numbers
+    mpz_init(limit);
+    mpz_set_ui(limit, 40);
     char message[100]; // message to be sent
 
     MPI_Status status; // status of the message
@@ -36,17 +40,22 @@ int main (int argc, char *argv[]) {
 
 
     if(rank != 0) {
+        char prime_str[100];
         mpz_t prime;
         mpz_init(prime);
-        mpz_set_d(prime, 101);
+        mpz_set_ui(prime,1);
+        while( mpz_cmp(prime, limit) < 0) {
+            mpz_nextprime(prime, prime);
+            mpz_get_str(prime_str, 10, prime);
+            mpz_set(prime, prime);  
+            mpz_set_str(prime, prime_str, 10);
+        }
 
-        char prime_str[100];
-        mpz_get_str(prime_str, 10, prime);
+       
+        // sprintf(message, "Greeting from process %d, the prime number is %s", rank, prime_str);
         
         sprintf(message, "Greeting from process %d, the prime number is %s", rank, prime_str);
-        
         dest = 0;
-        // uses strlen+1 so that '/0' gets transmitted
         MPI_Send(message, strlen(message)+1, MPI_CHAR, dest, 0, MPI_COMM_WORLD);
     }
     
