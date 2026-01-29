@@ -1,19 +1,12 @@
 /*
  * CP431/CP631 Assignment 1 - Prime Gaps Finder
- * MPI program to find the largest gap between consecutive primes up to 1 billion
+ * MPI program to find the largest gap between consecutive primes up to a number n (1 billion or 1 trillion)
  */
 
 #include <mpi.h>
 #include <gmp.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-
-typedef struct{
-    unsigned long gap;
-    unsigned long prime1;
-    unsigned long prime2;
-} PrimeGap;  // custyom struct to hold gap info
 
 int main(int argc, char *argv[]) {
     int id, p;
@@ -22,6 +15,13 @@ int main(int argc, char *argv[]) {
     unsigned long long local_gap = 0; // local max gap
     unsigned long long local_p1 = 0, local_p2 = 0; // p1,p2 - primes for local max gap
     double elapsed_time; // for bechmarking
+
+    mpz_t curr, next, prev, range_start, range_end, gap_temp; // GMP variables
+
+    MPI_Init(&argc, &argv); 
+    MPI_Comm_rank(MPI_COMM_WORLD, &id);
+    MPI_Comm_size(MPI_COMM_WORLD, &p);
+
 
     if (argc != 2) { // check for correct cli args
         if (id == 0) {
@@ -33,12 +33,6 @@ int main(int argc, char *argv[]) {
 
     n = strtoull(argv[1], NULL, 10);
 
-    mpz_t curr, next, range_start, range_end; // GMP variables
-
-    MPI_Init(&argc, &argv); 
-    MPI_Comm_rank(MPI_COMM_WORLD, &id);
-    MPI_Comm_size(MPI_COMM_WORLD, &p);
-
     MPI_Barrier(MPI_COMM_WORLD); // for becnhmarking 
     elapsed_time = -MPI_Wtime();
 
@@ -46,27 +40,33 @@ int main(int argc, char *argv[]) {
     high_val = 1 + (id + 1) * (n - 1) / p; // work division
 
     // Initialize GMP variables
+    mpz_init(prev);
     mpz_init(curr);
     mpz_init(next);
     mpz_init(range_start);
     mpz_init(range_end);
+    mpz_init(gap_temp);
 
-    mpz_set_ui(range_start, low_val);
-    mpz_set_ui(range_end, high_val);
+    mpz_set_ui(range_start, low_val); //lower range boundary
+    mpz_set_ui(range_end, high_val); //upper range boundary
 
     mpz_nextprime(curr, range_start); // first prime >= low_val
 
     if (mpz_cmp(curr,range_end)<=0){
         while (1){ // can do while true as well...
+            mpz_set(prev, curr); //store current primes
+
             mpz_nextprime(next,curr);
             if (mpz_cmp(next,range_end)>0){ // check if next prime is in range.
                 break;
             } 
-            unsigned long gap = mpz_get_ui(next) - mpz_get_ui(curr); // calculate gap
+
+            mpz_sub(gap_temp,next,prev); // calculate gap
+            unsigned long long gap = mpz_get_ui(gap_temp);
             if (gap > local_gap){
                 //check if gap is larger than local max gap
                 local_gap = gap;
-                local_p1 = mpz_get_ui(curr);
+                local_p1 = mpz_get_ui(prev);
                 local_p2 = mpz_get_ui(next);
                 //update the coresponding primes
             }
@@ -86,11 +86,11 @@ int main(int argc, char *argv[]) {
     if (id> 0){
         unsigned long long prev_lastp;
         MPI_Recv(&prev_lastp, 1, MPI_UNSIGNED_LONG_LONG, id - 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-        mpz_set_ull(curr, low_val);
+        mpz_set_ui(curr, low_val);
         mpz_nextprime(curr,curr);
 
         if (mpz_cmp(curr,range_end)<=0){   // first prime in current proc's range
-            unsigned long long firstp = mpz_get_ull(curr);
+            unsigned long long firstp = mpz_get_ui(curr);
             unsigned long long boundary_gap = firstp - prev_lastp;
 
             if (boundary_gap > local_gap){ // check if gap is larger than local max
@@ -136,9 +136,11 @@ int main(int argc, char *argv[]) {
 
         // save results for plotting
         FILE *fp = fopen("prime_gaps_results.txt", "a");
-        fprintf(fp, "%llu %d %.6f\n", n, p,  elapsed_time);
+        if (fp != NULL) {
+            fprintf(fp, "%llu %d %.6f\n", n, p, elapsed_time);
+            fclose(fp);
+        }
         printf("Time taken: %f seconds\n", elapsed_time);
-        fclose(fp);
         
         // Free allocated memory
         free(col_gaps);
@@ -148,9 +150,11 @@ int main(int argc, char *argv[]) {
     }
     // Clear GMP variables
     mpz_clear(curr);
+    mpz_clear(prev);
     mpz_clear(next);
     mpz_clear(range_start);
     mpz_clear(range_end);
+    mpz_clear(gap_temp);
 
     MPI_Finalize();
     return 0;
