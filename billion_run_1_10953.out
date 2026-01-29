@@ -1,0 +1,59 @@
+Group 10 - Prime Gaps Benchmark
+Job ID: 10953
+Node: teach01
+Started at: Wed Jan 28 19:25:26 EST 2026
+
+Compiling A1_grp10.c...
+Compilation successful!
+
+Testing 1 Billion
+Running with 2, 3, 4, 5, 6, 7, 8 processors
+
+Running with 2 processors...
+Started: Wed Jan 28 19:25:29 EST 2026
+Largest prime gap up to 1000000000 is 282 between primes 436273009 and 436273291
+Time taken: 113.153001 seconds
+Completed: Wed Jan 28 19:27:24 EST 2026
+
+Running with 3 processors...
+Started: Wed Jan 28 19:27:24 EST 2026
+Largest prime gap up to 1000000000 is 282 between primes 436273009 and 436273291
+Time taken: 75.430873 seconds
+Completed: Wed Jan 28 19:28:41 EST 2026
+
+Running with 4 processors...
+Started: Wed Jan 28 19:28:41 EST 2026
+Largest prime gap up to 1000000000 is 282 between primes 436273009 and 436273291
+Time taken: 56.500063 seconds
+Completed: Wed Jan 28 19:29:40 EST 2026
+
+Running with 5 processors...
+Started: Wed Jan 28 19:29:40 EST 2026
+Largest prime gap up to 1000000000 is 282 between primes 436273009 and 436273291
+Time taken: 45.217829 seconds
+Completed: Wed Jan 28 19:30:27 EST 2026
+
+Running with 6 processors...
+Started: Wed Jan 28 19:30:27 EST 2026
+Largest prime gap up to 1000000000 is 282 between primes 436273009 and 436273291
+Time taken: 37.803941 seconds
+Completed: Wed Jan 28 19:31:07 EST 2026
+
+Running with 7 processors...
+Started: Wed Jan 28 19:31:07 EST 2026
+Largest prime gap up to 1000000000 is 282 between primes 436273009 and 436273291
+Time taken: 32.492392 seconds
+Completed: Wed Jan 28 19:31:41 EST 2026
+
+Running with 8 processors...
+Started: Wed Jan 28 19:31:41 EST 2026
+Largest prime gap up to 1000000000 is 282 between primes 436273009 and 436273291
+Time taken: 28.398071 seconds
+Completed: Wed Jan 28 19:32:12 EST 2026
+
+1 Billion benchmarks completed
+
+BONUS: Testing 1 Trillion
+Using 8 processors
+
+Started: Wed Jan 28 19:32:12 EST 2026

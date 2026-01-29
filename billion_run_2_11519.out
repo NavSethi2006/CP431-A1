@@ -1,0 +1,71 @@
+Group 10 - Prime Gaps Benchmark
+Job ID: 11519
+Node: teach01
+Started at: Wed Jan 28 22:43:54 EST 2026
+
+Compiling A1_grp10.c...
+Compilation successful!
+
+Testing 1 Billion
+Running with 2, 3, 4, 5, 6, 7, 8 processors
+
+Running with 2 processors...
+Started: Wed Jan 28 22:43:57 EST 2026
+Largest prime gap up to 1000000000 is 282 between primes 436273009 and 436273291
+Time taken: 113.289104 seconds
+Completed: Wed Jan 28 22:45:52 EST 2026
+
+Running with 3 processors...
+Started: Wed Jan 28 22:45:52 EST 2026
+Largest prime gap up to 1000000000 is 282 between primes 436273009 and 436273291
+Time taken: 75.212186 seconds
+Completed: Wed Jan 28 22:47:09 EST 2026
+
+Running with 4 processors...
+Started: Wed Jan 28 22:47:09 EST 2026
+Largest prime gap up to 1000000000 is 282 between primes 436273009 and 436273291
+Time taken: 56.572541 seconds
+Completed: Wed Jan 28 22:48:07 EST 2026
+
+Running with 5 processors...
+Started: Wed Jan 28 22:48:07 EST 2026
+Largest prime gap up to 1000000000 is 282 between primes 436273009 and 436273291
+Time taken: 45.193790 seconds
+Completed: Wed Jan 28 22:48:54 EST 2026
+
+Running with 6 processors...
+Started: Wed Jan 28 22:48:54 EST 2026
+Largest prime gap up to 1000000000 is 282 between primes 436273009 and 436273291
+Time taken: 37.822991 seconds
+Completed: Wed Jan 28 22:49:34 EST 2026
+
+Running with 7 processors...
+Started: Wed Jan 28 22:49:34 EST 2026
+Largest prime gap up to 1000000000 is 282 between primes 436273009 and 436273291
+Time taken: 32.441553 seconds
+Completed: Wed Jan 28 22:50:09 EST 2026
+
+Running with 8 processors...
+Started: Wed Jan 28 22:50:09 EST 2026
+Largest prime gap up to 1000000000 is 282 between primes 436273009 and 436273291
+Time taken: 28.388959 seconds
+Completed: Wed Jan 28 22:50:39 EST 2026
+
+1 Billion benchmarks completed
+
+All benchmarks completed!
+Finished at: Wed Jan 28 22:50:39 EST 2026
+
+RESULTS SUMMARY
+
+1000000000 2 113.289104
+1000000000 3 75.212186
+1000000000 4 56.572541
+1000000000 5 45.193790
+1000000000 6 37.822991
+1000000000 7 32.441553
+1000000000 8 28.388959
+
+
+Job ID: 11519
+
