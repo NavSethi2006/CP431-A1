@@ -1,0 +1,33 @@
+Group 10 - Prime Gaps Benchmark
+Job ID: 11970
+Node: teach02
+Started at: Thu Jan 29 12:51:01 EST 2026
+
+Compiling A1_grp10.c...
+Compilation successful!
+
+BONUS: Testing 1 Trillion
+Using 8 processors
+
+Started: Thu Jan 29 12:51:05 EST 2026
+Largest prime gap up to 1000000000000 is 540 between primes 738832927927 and 738832928467
+Time taken: 6658.281912 seconds
+Completed: Thu Jan 29 14:42:10 EST 2026
+
+All benchmarks completed!
+Finished at: Thu Jan 29 14:42:10 EST 2026
+
+RESULTS SUMMARY
+
+1000000000 2 113.289104
+1000000000 3 75.212186
+1000000000 4 56.572541
+1000000000 5 45.193790
+1000000000 6 37.822991
+1000000000 7 32.441553
+1000000000 8 28.388959
+1000000000000 40 6658.281912
+
+
+Job ID: 11970
+
