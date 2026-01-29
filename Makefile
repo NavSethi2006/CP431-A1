@@ -11,7 +11,7 @@ SOURCE = A1_grp10.c # source
 
 all: $(TARGET)
 	@echo "Compilation successful"
-	@echo "Run benchmarks with `make test` or `make help` for more options"
+	@echo "Run benchmarks with 'make test' or 'make help' for more options"
 
 $(TARGET): $(SOURCE)  # Compile
 	$(CC) $(CFLAGS) -o $(TARGET) $(SOURCE) $(LIBS)
@@ -28,7 +28,6 @@ clean-results: #Clean results
 benchmark: $(TARGET) clean-results
 	@echo ""
 	@echo "Part 1: Testing 1 Billion with 2-8 processors"
-	@echo "--------------------------------------"
 	@mpirun -np 2 ./$(TARGET) 1000000000
 	@mpirun -np 3 ./$(TARGET) 1000000000
 	@mpirun -np 4 ./$(TARGET) 1000000000
@@ -38,11 +37,10 @@ benchmark: $(TARGET) clean-results
 	@mpirun -np 8 ./$(TARGET) 1000000000
 	@echo ""
 	@echo "Part 2: Testing 1 Trillion with 8 processors"
-	@echo "--------------------------------------"
 	@mpirun -np 8 ./$(TARGET) 1000000000000
 	@echo ""
 	@echo "========================================"
-	@echo "Benchmark Complete!"
+	@echo "Benchmark Complete"
 	@echo "Results saved to: prime_gaps_results.txt"
 	@echo "========================================"
 
